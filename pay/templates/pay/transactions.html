@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+<a  href="{% url 'home' %}" class="nav-link fs-4">&#8249;</a>
+    <h1>Transactions Detail</h1>
+
+    <form method="GET" class="row row-cols-lg-auto g-3 align-items-center mb-3">
+      <div class="col col-sm-6">
+        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+        <div class="input-group">
+          <div class="input-group-text">Date</div>
+          <input name="date" type="date" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+        </div>
+      </div>
+
+      <div class="col col-sm-6">
+        <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+        <select name="type" class="form-select" id="inlineFormSelectPref">
+          
+          <option value="All">All</option>
+          <option value="Expense">Expense</option>
+          <option value="Income">Income</option>
+        </select>
+      </div>
+
+    
+
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+    
+    {% for transaction in transactions %}
+        <div class="card p-3 mb-3"> 
+            <a class="nav-link text-dark" href="{% url 'transaction-detail' transaction.id %}">
+                <p><small>Trx ID:</small> {{transaction.trx_id}}</p>
+           
+            {% if transaction.transfer_type == 'Expense' %}
+            <div>
+                <p>To &nbsp;<span class="text-uppercase">{{transaction.to_user.name}} </span></p>
+                <h5 class="float-end text-danger">-{{transaction.amount}}</h5>
+            </div>
+            {% elif transaction.transfer_type == 'Income' %}
+            <div>
+                <p>From &nbsp;<span class="text-uppercase">{{transaction.to_user.name}}</span></p>
+                <h5 class="float-end text-success">+{{transaction.amount}}</h5>
+            </div>
+            {% endif %}
+
+            <p>{{transaction.created}}</p>
+             </a>
+        </div>
+        
+    {% endfor %}
+    
+</div>
+
+{% endblock content %}

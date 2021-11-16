@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="card shadow p-3">
+    <a  href="{% url 'home' %}" class="nav-link fs-4">&#8249;</a>
+        {% for noti in notis %}
+
+            <a class="nav-link text-dark" href="{% url 'noti-detail' noti.id %}">
+                {% if noti.transfer_type == 'Expense' %}
+                <div class="d-flex justify-content-between">
+                    <h5>Successfully Transferred</h5>
+                    <p><i class="fas fa-bell {% if noti.noti_type == 'Unread' %}fs-5 fw-bold text-danger{%endif%}"></i></p>
+                </div>
+                {% elif noti.transfer_type == "Income" %}
+                <div class="d-flex justify-content-between">
+                    <h5>Successfully Received</h5>
+                    <p><i class="fas fa-bell {% if noti.noti_type == 'Unread' %}fs-5 fw-bold text-danger{%endif%}"></i></p>
+                </div>
+                {% else %}
+                <div class="d-flex justify-content-between">
+                    <h5>Updated Successfully</h5>
+                    <p><i class="fas fa-bell {% if noti.noti_type == 'Unread' %}fs-5 fw-bold text-danger{%endif%}"></i></p>
+                </div>
+                {% endif%}
+                <p>{{noti.data}}</p>
+                <small>{{noti.created}}</small>
+            </a>
+                <hr>
+        {% endfor %}
+    </div>
+
+    <br><br>
+    {% if notis.has_other_pages %}
+    <ul class="pagination">
+        {% if notis.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ notis.previous_page_number }}">Previous</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+        </li>
+        {% endif %}
+
+        {% for i in notis.paginator.page_range %}
+        {% if notis.number == i %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="{{i}}">{{ i }}</a>
+            </li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+      
+        {% if notis.has_next %}
+        <li class="page-item">
+        <a class="page-link" href="?page={{ notis.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link">Next</a></li>
+        {% endif %}
+
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock content %}

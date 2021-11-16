@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card shadow p-3 text-center">
+
+        <div>
+          {{ svg|safe }}
+        </div>
+        <h2 class="text-capitalize">{{request.user.name}}</h2>
+        <h5>{{request.user.phone}}</h5>
+    </div>
+</div>  
+{% endblock content %}

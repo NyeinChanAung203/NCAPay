@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <div class="container">
+            <div class="card p-3 shadow">
+            <a  href="{{request.META.HTTP_REFERER}}" class="nav-link fs-4">&#8249;</a>
+                <div class="text-center mb-3">
+                    <img width="300px" src="{% static 'transaction.svg' %}">
+                </div>
+                <p><small class="text-muted">Trx ID:</small> {{transaction.trx_id}}</p>
+                <p><small class="text-muted">Ref Number:</small> {{transaction.ref_no}}</p>
+                <p><small class="text-muted">Type:</small> {{transaction.transfer_type}}</p>
+                <p><small class="text-muted">Amount:</small> {{transaction.amount}}</p>
+                {% if transaction.transfer_type == 'Expense' %}
+                <div>
+                    <p class=""><small class="text-muted">To-&nbsp;</small>{{transaction.to_user.name}} </p>
+                    <h5 class="float-end text-danger">-{{transaction.amount}}</h5>
+                </div>
+                {% elif transaction.transfer_type == 'Income' %}
+                <div>
+                    <p><small class="text-muted">From-&nbsp;</small>{{transaction.to_user.name}}</p>
+                    <h5 class="float-end text-success">+{{transaction.amount}}</h5>
+                </div>
+                {% endif %}
+
+                <p><small class="text-muted">Date and Time:</small>&nbsp;{{transaction.created}}</p>
+            </div>
+        </div>
+{% endblock content %}

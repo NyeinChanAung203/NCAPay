@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card shadow p-3">
+    <a  href="{{request.META.HTTP_REFERER}}" class="nav-link fs-4">&#8249;</a>
+        <div class="text-center">
+            <img width="300px" src="{% static 'noti_detail.svg' %}">
+        </div>
+        <div class="text-center mt-3">
+            {% if noti.transfer_type == 'Expense' %}
+                <h3>Successfully Transferred</h3>
+            {% elif noti.transfer_type == "Income" %}
+                <h3>Successfully Received</h3>
+            {% else %}
+                <h3>Updated Successfully</h3>
+            {% endif%}
+            <br>
+            <p>{{noti.data}}</p>
+            <small>{{noti.created}}</small>
+        </div>
+    </div>
+</div>
+{% endblock content %}

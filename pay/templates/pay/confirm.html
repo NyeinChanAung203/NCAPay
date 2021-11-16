@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="card shadow p-3">
+        <div class="text-center">
+            <img width="100px" src="{% static 'confirm.svg' %}">
+        </div>
+    <div>
+        <p>From</p>
+        <h5>{{request.user.name}}</h5>
+        <h5>{{request.user.phone}}</h5>
+    </div>
+    <div>
+        <p>To</p>
+        <h5>{{to_user.name}}</p>
+        <h5>{{to_user.phone}}</h5>
+    </div>
+    <div>
+        <p>Amount(MMK)</p>
+        <h5>{{amount}}</h5>
+        
+    </div>
+    <div>
+        <p>Description</p>
+        <p>{{description}}</p>
+        
+    </div>
+ 
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Confirm
+    </button>
+ </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+            <img width="300px" src="{% static 'confirm_modal.svg' %}">
+        </div>
+        <form method="POST" class="text-center">
+            {% csrf_token %}
+            <h2 class="text-center mt-3">Please Fill Your Password</h2>
+            <input class="form-control" type="password" name="password">
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}

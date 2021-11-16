@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+   <!-- main body -->
+    
+        <div class="container">
+
+            <!-- User Wallet -->
+            <div class="card p-3 shadow mb-3">
+                <img class="img-circle  mx-auto d-block" src="https://ui-avatars.com/api/?name={{request.user.name}}&background=00B0FF&color=fff" />
+                <div class="card-body text-center">
+                    <h4>{{request.user.name}}</h4>
+                    <small class="text-muted">{{request.user.wallet.amount}} MMK</small>
+                </div>
+            </div>
+
+            <!-- scan pay -->
+            <div class="row mb-3">
+                <div class="col">
+                    <a class="nav-link text-dark" href="{% url 'scan-qr' %}">
+                        <div class="card shadow p-2 fs-6">
+                            <small><img class="scan-img" src="{% static 'scan.png' %}">&nbsp;&nbsp;  Scan</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a class="nav-link text-dark" href="{% url 'receive-qr' %}">
+                        <div class="card shadow p-2 fs-6">
+                            <small><i class="fas fa-qrcode"></i>&nbsp;&nbsp; Receive Scan</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- All functions -->
+            <div class="card shadow p-2">
+                
+                <a href="{% url 'transfer' %}" class="nav-link text-dark">
+                    <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                            <img src="https://img.icons8.com/color/48/000000/money-transfer.png" class="img-size"/>
+                            &nbsp;&nbsp;
+                            Transfer
+                            </div>
+                        <p class="pr-2">&#62;</p>
+                    </div>
+                </a>
+                
+                <hr>
+                <a href="{% url 'wallet' %}" class="nav-link text-dark">
+                    <div class="d-flex justify-content-between align-content-center">
+                        <div>
+                            <img src="https://img.icons8.com/color/48/000000/wallet--v1.png" class="img-size"/>
+                            &nbsp;&nbsp;Wallet
+                        </div>
+                        <p class="pr-2">&#62;</p>
+                    </div>
+                </a>
+                <hr>
+                <a href="{% url 'transactions' %}" class="nav-link text-dark">
+                    <div class="d-flex justify-content-between align-content-center">
+                        <div>
+                            <img src="https://img.icons8.com/color/48/000000/activity-history.png" class="img-size"/>
+                            &nbsp;&nbsp;Histroy
+                        </div>
+                        <p class="pr-2">&#62;</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    
+    </div>
+{% endblock content %}

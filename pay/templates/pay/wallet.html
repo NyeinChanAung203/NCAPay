@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+
+        <div class="p-5 mb-4 bg-light rounded-3">
+        <a  href="{% url 'home' %}" class="nav-link fs-4">&#8249;</a>
+        <div class="text-center">
+            <img width="300px" src="{% static 'wallet.svg' %}">
+        </div>
+        <div class="container-fluid py-5">
+            
+            <p >Balance</p>
+            <p class="col-md-8 fs-4">{{user.wallet.amount}} MMK</p>
+            <p >Account Number</p>
+            <p class="col-md-8 fs-4">{{user.acc_num}}</p>
+            <p class="text-capitalize">{{user.name}}</p>
+            
+
+            
+        </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

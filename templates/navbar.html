@@ -1,0 +1,74 @@
+{% load tags %}
+{% load static %}
+<nav class="navbar navbar-bg-color mb-3 navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home'%}">
+                <img src="{% static 'pay.png' %}" alt="" width="30" height="24">
+            </a>
+            <span class="navbar-brand mb-0 m-auto h1 fw-bold">𝒩𝒞𝒜 𝒫𝒶𝓎</span>
+            <a href="{% url 'noti' %}" class="nav-link position-relative text-dark">
+              <i class="fas fa-bell"></i>
+              <span id="noti" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {% unread_noti request %}+
+              </span>
+            </a>
+        </div>
+</nav>
+
+{% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'transfer' %}">Transfer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'wallet' %}">Wallet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'transactions' %}">Transactions</a>
+        </li>
+        <li class="nav-item">
+         
+          <a href="{% url 'noti' %}" class="nav-link position-relative">
+            Notification 
+           
+            
+            
+          </a>
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> {% endcomment %}
+
+<script>
+  noti = document.getElementById('noti').innerHTML
+  console.log(noti.trim())
+  if(noti.trim()=='0+'){
+    document.getElementById('noti').remove()
+  }
+</script>
